@@ -1,7 +1,7 @@
 <?php
-//Autoload
-$loader = require 'vendor/autoload.php';
+require 'vendor/autoload.php';
 
+<<<<<<< HEAD
 //Instanciando objeto
 /*$app = new \Slim\Slim(array(
     'templates.path' => 'templates'
@@ -14,31 +14,15 @@ $app = new \Slim\Slim();
 get('/', function () { 
   echo "Hello, World!"; 
 });
+=======
+//instancie o objeto
+$app = new \Slim\App();
+>>>>>>> 756554dbad9a6ceddc556d9aff0612afa3ab670c
 
-//Listando todas
-$app->get('/pessoas/', function() use ($app){
-	(new \controllers\Pessoa($app))->lista();
+//defina a rota
+$app->get('/', function() {
+    $data = array("data"=>array("Hello"=>"World!"));
+    return json_encode($data);
 });
 
-//get pessoa
-$app->get('/pessoas/:id', function($id) use ($app){
-	(new \controllers\Pessoa($app))->get($id);
-});
-
-//nova pessoa
-$app->post('/pessoas/', function() use ($app){
-	(new \controllers\Pessoa($app))->nova();
-});
-
-//edita pessoa
-$app->put('/pessoas/:id', function($id) use ($app){
-	(new \controllers\Pessoa($app))->editar($id);
-});
-
-//apaga pessoa
-$app->delete('/pessoas/:id', function($id) use ($app){
-	(new \controllers\Pessoa($app))->excluir($id);
-});
-
-//Rodando aplicação
 $app->run();
