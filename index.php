@@ -3,9 +3,17 @@
 $loader = require 'vendor/autoload.php';
 
 //Instanciando objeto
-$app = new \Slim\Slim(array(
+/*$app = new \Slim\Slim(array(
     'templates.path' => 'templates'
-));
+));*/
+
+//instancie o objeto
+$app = new \Slim\Slim();
+
+//defina a rota
+get('/', function () { 
+  echo "Hello, World!"; 
+});
 
 //Listando todas
 $app->get('/pessoas/', function() use ($app){

@@ -1,0 +1,40 @@
+version: "2"
+
+services:
+
+    mysql:
+        image: mysql:5.7
+        restart: always
+        ports: 
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: testedatabase
+            MYSQL_USER: teste
+            MYSQL_PASSWORD: teste
+            MYSQL_ROOT_PASSWORD: admin
+        volumes:
+            - mysql-data:/var/lib/mysql
+
+    php:
+        image: php:7.2-apache
+        ports:
+            - "80:80"
+        volumes:
+            - .:/var/www/html
+        depends_on:
+            - mysql
+        links:
+            - mysql
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
+        depends_on:
+            - mysql
+        links:
+            - mysql
+
+volumes:
+    mysql-data:
