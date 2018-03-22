@@ -16,7 +16,7 @@ services:
             - mysql-data:/var/lib/mysql
 
     php:
-        image: php:7.2-apache
+        image: igorgsarmento/php5.6-apache
         ports:
             - "80:80"
         volumes:
