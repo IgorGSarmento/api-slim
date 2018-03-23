@@ -3,7 +3,7 @@ MAINTAINER Igor Gomes Sarmento "igorgomessarmento@gmail.com"
 
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y \
-    bzip2 curl git less mysql-client sudo unzip zip \
+    bzip2 curl git less mysql-client sudo unzip zip vim \
     libbz2-dev libfontconfig1 libfontconfig1-dev \
     libfreetype6-dev libjpeg62-turbo-dev libpng12-dev libzip-dev && \
     rm -rf /var/lib/apt/lists/*
@@ -24,5 +24,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 ENV PATH $PATH:/root/composer/vendor/bin
 
 RUN usermod -u 1000 www-data && a2enmod rewrite
+
+# Update the default apache site with the config we created.
+ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
 
 WORKDIR /var/www/html
