@@ -27,6 +27,13 @@ $container['db'] = function ($c) {
    
 };
 
+$container['renderer'] = new \Slim\Views\PhpRenderer("../templates");
+
+
+$app->get('/myroute', function (Request $request, Response $response){
+    return $this->renderer->render($response, "/default.html");
+});
+
 //defina a rota
 $app->get('/', function(Request $request, Response $response, array $args) {
     $data = array("data"=>array("Hello"=>"World!"));
