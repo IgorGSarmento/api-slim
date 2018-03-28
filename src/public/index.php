@@ -27,18 +27,19 @@ $container['db'] = function ($c) {
    
 };
 
-$container['renderer'] = new \Slim\Views\PhpRenderer("../templates");
+// Registra componete de template no container
+$container['view'] = function ($container) {
+    return new \Slim\Views\PhpRenderer('../templates');
+};
 
 
-$app->get('/myroute', function (Request $request, Response $response){
-    return $this->renderer->render($response, "/default.html");
-});
-
-//defina a rota
-$app->get('/', function(Request $request, Response $response, array $args) {
-    $data = array("data"=>array("Hello"=>"World!"));
-    return json_encode($data);
-});
+// Rota padrão com template
+$app->get('/', function ($request, $response, $args) {
+    return $this->view->render($response, 'default.php', 
+    	array("data"=>array("Hello"=>"World!"))
+    );
+    
+})->setName('profile');
 
 // Adiciona usuario
 $app->post('/user', function (Request $request, Response $response, array $args) {
